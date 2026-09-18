@@ -1,0 +1,72 @@
+/* Estilos Generales de la Hostería ATEP */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+header {
+    background-color: #2c3e50; /* Color oscuro elegante */
+    color: white;
+    padding: 2rem 1rem;
+    text-align: center;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2.5rem;
+}
+
+header p {
+    margin-top: 0.5rem;
+    font-size: 1.2rem;
+    opacity: 0.8;
+}
+
+main {
+    padding: 2rem;
+    flex: 1;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Estilos para las tarjetas de habitaciones */
+.habitacion-card {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.habitacion-card h2 {
+    margin-top: 0;
+    color: #2c3e50;
+}
+
+.habitacion-card p {
+    margin-bottom: 0;
+    line-height: 1.6;
+}
+
+.servicios-extra {
+    background-color: #e8f5e9; /* Fondo verde claro para servicios */
+    padding: 1rem;
+    border-radius: 5px;
+    margin-top: 2rem;
+    border-left: 5px solid #4caf50;
+}
+
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 1rem;
+    margin-top: auto;
+}
