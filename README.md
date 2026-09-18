@@ -32,21 +32,9 @@ El proyecto será desarrollado como un sistema web, utilizando:
 - JavaScript: funcionalidades, validaciones e interacción del sistema.
 - Base de datos: almacenamiento de la información de huéspedes, habitaciones y reservas.
 La estructura general será:
-                  SISTEMA WEB
-                   │
-          ┌────────┴────────┐
-          │                 │
-        HTML               CSS
-   Estructura de       Diseño visual
-      páginas               │
-          │                 │
-          └────────┬────────┘
-                   │
-              JavaScript
-          Funcionalidades
-                   │
-                   ▼
-              BASE DE DATOS
+
+
+            
 4.2 Módulos principales
 Módulo de huéspedes
 - Registrar huéspedes.
@@ -78,27 +66,4 @@ Podrá:
 - Consultar los datos de los huéspedes.
 - Consultar las habitaciones y su disponibilidad.
 - Gestionar la información relacionada con la estadía.
-4.4 Organización de archivos
-Si están trabajando directamente con HTML, CSS y JavaScript, una organización posible sería:
-Proyecto-Hosteria/
-│
-├── index.html
-│
-├── pages/
-│   ├── login.html
-│   ├── reservas.html
-│   ├── habitaciones.html
-│   ├── huespedes.html
-│   └── precios.html
-│
-├── css/
-│   └── estilos.css
-│
-├── js/
-│   ├── reservas.js
-│   ├── habitaciones.js
-│   ├── huespedes.js
-│   └── precios.js
-│
-└── img/
-    └── imágenes del sistema
+
