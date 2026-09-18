@@ -32,7 +32,7 @@ El proyecto será desarrollado como un sistema web, utilizando:
 - JavaScript: funcionalidades, validaciones e interacción del sistema.
 - Base de datos: almacenamiento de la información de huéspedes, habitaciones y reservas.
 La estructura general será:
-              SISTEMA WEB
+                  SISTEMA WEB
                    │
           ┌────────┴────────┐
           │                 │
