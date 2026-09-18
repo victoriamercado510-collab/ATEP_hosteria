@@ -1,4 +1,4 @@
- Sistema de Gestión de Reservas - Hostería ATEP
+ Sistema de Gestión de Reservas - Hostería
 
 ## Descripción del proyecto
 
@@ -12,7 +12,7 @@ Además, se busca que el proyecto tenga una estructura organizada y escalable, d
 
 ## Objetivos específicos
 
-* Gestionar los datos de los huéspedes, permitiendo registrar y consultar la información de personas afiliadas y no afiliadas a ATEP.
+* Gestionar los datos de los huéspedes, permitiendo registrar y consultar la información de personas afiliadas y no afiliadas.
 * Gestionar las habitaciones de la hostería, registrando su número, ubicación, capacidad, tipo y disponibilidad.
 * Registrar y administrar las reservas, asociando los datos del huésped con la habitación y las fechas de ingreso y egreso.
 * Controlar la disponibilidad y los precios de las habitaciones, teniendo en cuenta las fechas de la reserva y si el huésped es afiliado o no afiliado.
