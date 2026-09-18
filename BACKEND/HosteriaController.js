@@ -1,4 +1,4 @@
-// Controlador de Hostería - Integrante B
+// Controlador de Hostería 
 const gestionarHabitaciones = () => {
-    console.log("Módulo de habitaciones actualizado por Integrante B");
+    console.log("Gestionando habitaciones en la hostería versión B...");
 };
