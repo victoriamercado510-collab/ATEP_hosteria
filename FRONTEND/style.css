@@ -42,7 +42,7 @@ footer {
     position: absolute;
     bottom: 0;
     width: 100%;
-
+}
 nav {
     background-color: #333;
     padding: 0;
@@ -69,5 +69,4 @@ nav a {
 
 nav a:hover {
     background-color: #111;
-
 }
