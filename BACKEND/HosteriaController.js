@@ -1,4 +1,4 @@
-// Controlador de Hostería - Versión Integrante A
+// Controlador Version A
 const gestionarHabitaciones = () => {
-    console.log("Módulo de habitaciones gestionado por Integrante A");
+    console.log("Gestionando habitaciones en la hostería Version A");
 };
