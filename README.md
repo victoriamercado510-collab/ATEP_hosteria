@@ -23,3 +23,82 @@ Además, se busca que el proyecto tenga una estructura organizada y escalable, d
 * `FRONTEND/` : interfaz de usuario, páginas HTML y archivos de estilos (`style.css`).
 * `database/` : scripts, modelos y archivos relacionados con la base de datos.
 * `docs/` : documentación del proyecto, informes y guías del trabajo práctico.
+4. Estructura del proyecto
+
+   Arquitectura del sistema
+El proyecto será desarrollado como un sistema web, utilizando:
+- HTML: estructura y contenido de las páginas.
+- CSS: diseño y apariencia visual de la interfaz.
+- JavaScript: funcionalidades, validaciones e interacción del sistema.
+- Base de datos: almacenamiento de la información de huéspedes, habitaciones y reservas.
+La estructura general será:
+              SISTEMA WEB
+                   │
+          ┌────────┴────────┐
+          │                 │
+        HTML               CSS
+   Estructura de       Diseño visual
+      páginas               │
+          │                 │
+          └────────┬────────┘
+                   │
+              JavaScript
+          Funcionalidades
+                   │
+                   ▼
+              BASE DE DATOS
+4.2 Módulos principales
+Módulo de huéspedes
+- Registrar huéspedes.
+- Consultar y modificar sus datos.
+Módulo de habitaciones
+- Registrar las habitaciones.
+- Indicar número, ubicación, capacidad y distribución de camas.
+- Consultar su disponibilidad.
+Módulo de reservas
+- Crear reservas.
+- Asociar huésped y habitación.
+- Registrar fecha de ingreso y egreso.
+- Consultar, modificar o cancelar reservas.
+Módulo de precios
+- Registrar los precios correspondientes.
+Módulo de disponibilidad
+- Consultar qué habitaciones están disponibles según las fechas seleccionadas.
+- Evitar registrar una reserva cuando la habitación ya está ocupada.
+ROLES
+Podrá:
+- Registrar huéspedes.
+- Consultar disponibilidad.
+- Realizar reservas.
+- Consultar y modificar reservas.
+- Consultar precios.
+Personal de la Hostería
+Podrá:
+- Consultar las reservas.
+- Consultar los datos de los huéspedes.
+- Consultar las habitaciones y su disponibilidad.
+- Gestionar la información relacionada con la estadía.
+4.4 Organización de archivos
+Si están trabajando directamente con HTML, CSS y JavaScript, una organización posible sería:
+Proyecto-Hosteria/
+│
+├── index.html
+│
+├── pages/
+│   ├── login.html
+│   ├── reservas.html
+│   ├── habitaciones.html
+│   ├── huespedes.html
+│   └── precios.html
+│
+├── css/
+│   └── estilos.css
+│
+├── js/
+│   ├── reservas.js
+│   ├── habitaciones.js
+│   ├── huespedes.js
+│   └── precios.js
+│
+└── img/
+    └── imágenes del sistema
