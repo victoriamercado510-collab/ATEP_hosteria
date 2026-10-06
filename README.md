@@ -147,45 +147,7 @@ Sistema de Gestión de Reservas
 
 ---
 
-## 🏗️ Arquitectura
 
-El proyecto utilizará una arquitectura web basada en **ASP.NET Core MVC**, organizada en capas para separar las responsabilidades del sistema.
-
-```text
-┌─────────────────────────────┐
-│       PRESENTACIÓN          │
-│   ASP.NET Core MVC / HTML    │
-│       CSS / Bootstrap        │
-└──────────────┬──────────────┘
-               │
-┌──────────────▼──────────────┐
-│       CAPA DE NEGOCIO        │
-│      Reglas del sistema      │
-└──────────────┬──────────────┘
-               │
-┌──────────────▼──────────────┐
-│         CAPA DE DATOS        │
-│      Entity Framework Core   │
-└──────────────┬──────────────┘
-               │
-┌──────────────▼──────────────┐
-│          SQL SERVER          │
-│       Base de datos          │
-└─────────────────────────────┘
-```
-
-### Tecnologías utilizadas
-
-- **C#** — Lenguaje principal de programación.
-- **ASP.NET Core MVC** — Desarrollo de la aplicación web.
-- **Entity Framework Core** — Comunicación entre la aplicación y la base de datos.
-- **SQL Server** — Gestión y almacenamiento de los datos.
-- **HTML / CSS** — Estructura y estilos de las interfaces.
-- **Bootstrap** — Diseño y componentes visuales.
-- **Visual Studio** — Entorno de desarrollo.
-- **Git / GitHub** — Control de versiones y trabajo colaborativo.
-
----
 
 ## 🔄 Funcionamiento general
 
