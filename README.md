@@ -1,69 +1,250 @@
- Sistema de Gestión de Reservas - Hostería
+# Sistema de Gestión de Reservas — Hostería ATEP
 
-## Descripción del proyecto
+## 📌 Descripción del proyecto
 
-El proyecto consiste en el desarrollo de un sistema digital destinado a la gestión integral de reservas, control de habitaciones y administración de huéspedes para la hostería. Su propósito principal es organizar y facilitar la administración de la disponibilidad, las tarifas diferenciales y el registro de los visitantes.
+El proyecto consiste en el desarrollo de un **sistema web para la gestión de reservas y huéspedes de la Hostería ATEP de Tafí del Valle**.
 
-El sistema busca resolver la problemática de llevar un control manual y desordenado de las reservas, evitando la superposición de fechas en una misma habitación y permitiendo consultar de manera sencilla la información histórica y actual disponible.
+Actualmente, parte del proceso de reserva y registro de huéspedes se realiza de manera manual y mediante diferentes medios de comunicación, como WhatsApp, mensajes, llamadas y correo electrónico. Esto puede generar dificultades para centralizar la información de los clientes, las reservas, las habitaciones disponibles y los datos de los huéspedes.
 
-Entre las principales funcionalidades previstas se encuentra la posibilidad de registrar y administrar los datos de los huéspedes (afiliados y no afiliados), gestionar las habitaciones según su tipo y capacidad, y realizar operaciones relacionadas con las reservas y sus tarifas correspondientes. El sistema permitirá verificar la disponibilidad de espacio, registrar estadas y modificar la información cuando sea necesario.
+La propuesta busca **digitalizar y centralizar el proceso**, permitiendo que el personal de la hostería gestione desde un único sistema la información relacionada con clientes, habitaciones, reservas y estadías.
 
-Además, se busca que el proyecto tenga una estructura organizada y escalable, de manera que cada componente (frontend y backend) tenga una responsabilidad definida. Esto facilitará el desarrollo, el mantenimiento y futuras ampliaciones del sistema.
+El sistema contará con una base de datos centralizada donde se almacenará la información de los huéspedes, las reservas y el estado de las habitaciones. De esta manera, cuando un cliente llegue a la hostería, el personal podrá buscar sus datos y consultar su reserva desde el sistema.
 
-## Objetivos específicos
+Además, se contempla la posibilidad de que el cliente pueda registrarse previamente mediante un enlace, evitando la necesidad de utilizar documentación o registros manuales durante el proceso de reserva.
 
-* Gestionar los datos de los huéspedes, permitiendo registrar y consultar la información de personas afiliadas y no afiliadas.
-* Gestionar las habitaciones de la hostería, registrando su número, ubicación, capacidad, tipo y disponibilidad.
-* Registrar y administrar las reservas, asociando los datos del huésped con la habitación y las fechas de ingreso y egreso.
-* Controlar la disponibilidad y los precios de las habitaciones, teniendo en cuenta las fechas de la reserva y si el huésped es afiliado o no afiliado.
+---
 
-## Estructura del proyecto
+## 🎯 Objetivo general
 
-* `BACKEND/` : código correspondiente al servidor, controladores y lógica de negocio del sistema.
-* `FRONTEND/` : interfaz de usuario, páginas HTML y archivos de estilos (`style.css`).
-* `database/` : scripts, modelos y archivos relacionados con la base de datos.
-* `docs/` : documentación del proyecto, informes y guías del trabajo práctico.
-4. Estructura del proyecto
+Desarrollar un sistema web que permita **gestionar y centralizar las reservas, huéspedes, habitaciones y estadías de la Hostería ATEP de Tafí del Valle**, reemplazando parte de los procesos manuales actuales por una solución informática organizada y accesible para el personal autorizado.
 
-   Arquitectura del sistema
-El proyecto será desarrollado como un sistema web, utilizando:
-- HTML: estructura y contenido de las páginas.
-- CSS: diseño y apariencia visual de la interfaz.
-- JavaScript: funcionalidades, validaciones e interacción del sistema.
-- Base de datos: almacenamiento de la información de huéspedes, habitaciones y reservas.
-La estructura general será:
+---
 
+## 🎯 Objetivos específicos
 
-            
-4.2 Módulos principales
-Módulo de huéspedes
-- Registrar huéspedes.
-- Consultar y modificar sus datos.
-Módulo de habitaciones
-- Registrar las habitaciones.
-- Indicar número, ubicación, capacidad y distribución de camas.
-- Consultar su disponibilidad.
-Módulo de reservas
-- Crear reservas.
-- Asociar huésped y habitación.
-- Registrar fecha de ingreso y egreso.
-- Consultar, modificar o cancelar reservas.
-Módulo de precios
-- Registrar los precios correspondientes.
-Módulo de disponibilidad
-- Consultar qué habitaciones están disponibles según las fechas seleccionadas.
-- Evitar registrar una reserva cuando la habitación ya está ocupada.
-ROLES
-Podrá:
-- Registrar huéspedes.
-- Consultar disponibilidad.
-- Realizar reservas.
-- Consultar y modificar reservas.
-- Consultar precios.
-Personal de la Hostería
-Podrá:
-- Consultar las reservas.
-- Consultar los datos de los huéspedes.
-- Consultar las habitaciones y su disponibilidad.
-- Gestionar la información relacionada con la estadía.
+- Registrar y administrar los datos de los clientes y huéspedes.
+- Gestionar las habitaciones y su disponibilidad.
+- Registrar, modificar y consultar reservas.
+- Asociar cada reserva con un cliente y una habitación.
+- Permitir al personal consultar las reservas al momento de la llegada del huésped.
+- Registrar huéspedes que no hayan realizado previamente su registro.
+- Gestionar el ingreso y salida de los huéspedes.
+- Registrar la información correspondiente a las fechas de entrada y salida.
+- Contemplar la condición de afiliado de ATEP para determinar los beneficios o descuentos correspondientes.
+- Centralizar la información en una única base de datos.
+- Reducir el uso de registros manuales y la duplicación de información.
+- Facilitar al personal de la hostería el control de habitaciones ocupadas y disponibles.
+- Dejar preparada la estructura del sistema para futuras funcionalidades relacionadas con pagos y cancelaciones.
 
+---
+
+## 🏨 Alcance del sistema
+
+El sistema estará destinado principalmente al **personal encargado de la Hostería ATEP de Tafí del Valle**.
+
+Entre las principales funcionalidades se encuentran:
+
+### 👤 Gestión de clientes
+
+- Registro de clientes.
+- Consulta de datos personales.
+- Modificación de información.
+- Identificación de clientes afiliados y no afiliados.
+
+### 🛏️ Gestión de habitaciones
+
+- Registro de habitaciones.
+- Cantidad de camas por habitación.
+- Estado de las habitaciones.
+- Consulta de habitaciones disponibles y ocupadas.
+
+### 📅 Gestión de reservas
+
+- Creación de reservas.
+- Consulta de reservas.
+- Modificación de reservas.
+- Cancelación de reservas.
+- Asociación entre cliente, habitación y fechas de estadía.
+
+### 🧾 Gestión de huéspedes
+
+Cuando el huésped llega a la hostería, el personal podrá buscar su información y consultar la reserva correspondiente.
+
+En caso de que la persona no se encuentre registrada previamente, el encargado podrá cargar sus datos directamente desde el sistema.
+
+### 🚪 Ingreso y salida
+
+El sistema permitirá registrar:
+
+- Fecha de ingreso.
+- Fecha prevista de salida.
+- Estado de la estadía.
+- Huéspedes alojados.
+
+Esto permitirá conocer qué habitaciones están ocupadas y quiénes se encuentran alojados en cada una.
+
+---
+
+## 💳 Pagos y cancelaciones
+
+Como parte del análisis del sistema se contempla la posibilidad de incorporar posteriormente un sistema de pagos mediante **Mercado Pago**.
+
+Una de las alternativas planteadas consiste en utilizar un **30 % de la reserva como pago anticipado**, relacionado con la confirmación y las condiciones de cancelación.
+
+Esta funcionalidad será analizada durante el desarrollo para determinar la alternativa más adecuada para el sistema.
+
+---
+
+## 👥 Afiliación ATEP
+
+El sistema deberá contemplar si el cliente es afiliado a ATEP, ya que esta condición puede modificar el precio o permitir determinados beneficios.
+
+Se prevé registrar la condición de afiliación y, cuando corresponda, solicitar un comprobante para verificarla.
+
+El descuento o tarifa correspondiente deberá calcularse dentro del proceso de reserva según las reglas definidas para la hostería.
+
+---
+
+## 🗂️ Estructura general del sistema
+
+El sistema estará organizado en diferentes módulos:
+
+```text
+Sistema de Gestión de Reservas
+│
+├── Usuarios
+│   └── Inicio de sesión y permisos
+│
+├── Clientes
+│   ├── Registrar
+│   ├── Consultar
+│   └── Modificar
+│
+├── Habitaciones
+│   ├── Registrar
+│   ├── Consultar disponibilidad
+│   └── Estado
+│
+├── Reservas
+│   ├── Crear reserva
+│   ├── Consultar
+│   ├── Modificar
+│   └── Cancelar
+│
+├── Huéspedes
+│   ├── Registro
+│   ├── Check-in
+│   └── Check-out
+│
+├── Pagos
+│   └── Registro y consulta
+│
+└── Reportes
+    ├── Reservas
+    ├── Habitaciones
+    └── Huéspedes
+```
+
+---
+
+## 🏗️ Arquitectura
+
+El proyecto utilizará una arquitectura web basada en **ASP.NET Core MVC**, organizada en capas para separar las responsabilidades del sistema.
+
+```text
+┌─────────────────────────────┐
+│       PRESENTACIÓN          │
+│   ASP.NET Core MVC / HTML    │
+│       CSS / Bootstrap        │
+└──────────────┬──────────────┘
+               │
+┌──────────────▼──────────────┐
+│       CAPA DE NEGOCIO        │
+│      Reglas del sistema      │
+└──────────────┬──────────────┘
+               │
+┌──────────────▼──────────────┐
+│         CAPA DE DATOS        │
+│      Entity Framework Core   │
+└──────────────┬──────────────┘
+               │
+┌──────────────▼──────────────┐
+│          SQL SERVER          │
+│       Base de datos          │
+└─────────────────────────────┘
+```
+
+### Tecnologías utilizadas
+
+- **C#** — Lenguaje principal de programación.
+- **ASP.NET Core MVC** — Desarrollo de la aplicación web.
+- **Entity Framework Core** — Comunicación entre la aplicación y la base de datos.
+- **SQL Server** — Gestión y almacenamiento de los datos.
+- **HTML / CSS** — Estructura y estilos de las interfaces.
+- **Bootstrap** — Diseño y componentes visuales.
+- **Visual Studio** — Entorno de desarrollo.
+- **Git / GitHub** — Control de versiones y trabajo colaborativo.
+
+---
+
+## 🔄 Funcionamiento general
+
+El funcionamiento propuesto será:
+
+```text
+Cliente solicita una reserva
+          ↓
+Personal registra los datos
+          ↓
+Se consulta disponibilidad
+          ↓
+Se selecciona habitación
+          ↓
+Se registra la reserva
+          ↓
+Información almacenada en SQL Server
+          ↓
+Cliente llega a la hostería
+          ↓
+Personal busca sus datos
+          ↓
+Se consulta la reserva
+          ↓
+Check-in
+          ↓
+Estadía
+          ↓
+Check-out
+```
+
+El sistema permitirá que toda la información quede registrada en un único lugar, facilitando el acceso y control de los datos por parte del personal de la hostería.
+
+---
+
+## 👥 Equipo de trabajo
+
+El proyecto será desarrollado por un equipo de **3 integrantes**.
+
+El trabajo se organizará mediante **GitHub**, utilizando repositorios y ramas para facilitar el desarrollo colaborativo y el control de versiones.
+
+---
+
+## 🚀 Futuras mejoras
+
+Como posibles ampliaciones del sistema se consideran:
+
+- Registro y reserva directamente por parte del cliente.
+- Integración con Mercado Pago.
+- Sistema de notificaciones.
+- Generación de comprobantes.
+- Registro automatizado de información requerida por organismos correspondientes.
+- Reportes estadísticos.
+- Administración de múltiples establecimientos.
+
+---
+
+## 📌 Estado del proyecto
+
+**Proyecto Final Integrador — Tecnicatura Universitaria en Programación — UTN**
+
+Estado actual: **En desarrollo**.
