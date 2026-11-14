@@ -294,4 +294,130 @@ Git y GitHub se utilizarán para compartir cambios y mantener el historial del p
 
 ## Equipo
 
+ 
+
+---
+
+# 🧪 Verificación y validación del sistema (TP N.º 4)
+
+## 1. Objetivo de la verificación
+
+Se realizó una verificación de la primera versión del Sistema de Gestión de Reservas de la Hostería ATEP, enfocada específicamente en el módulo de habitaciones.
+
+El objetivo fue comprobar que el sistema permita consultar las habitaciones, visualizar sus estados y realizar cambios correctamente, respetando las reglas de negocio establecidas en el proyecto.
+
+La verificación se realizó tomando como referencia los requerimientos y criterios de aceptación definidos en este README.
+
+## 2. Requerimientos verificados
+
+Se comprobaron los siguientes requerimientos:
+
+- **R1. Estados de habitaciones:** el sistema solamente acepta los cuatro estados acordados: `libre`, `ocupada`, `en_limpieza` y `clausurada`.
+- **R2. Etiquetas y colores:** cada estado tiene una etiqueta y un color definidos en un único lugar. Además, siempre se muestra un texto para no depender únicamente del color.
+- **R3. Datos de habitaciones:** el número de habitación es obligatorio, mientras que las camas y las plazas son datos opcionales.
+- **R4. Cambio de estado:** el encargado puede modificar el estado de una habitación y el cambio debe guardarse correctamente.
+- **R5. Regla de limpieza:** el horario de salida es a las 10:00 y la limpieza se extiende hasta las 10:30. No se permite liberar una habitación antes de ese horario.
+- **R6. Identificación y clausura:** el número de habitación debe ser único y las habitaciones no se eliminan físicamente, sino que pasan al estado `clausurada`.
+
+## 3. Estrategia de pruebas
+
+Para comprobar el funcionamiento del sistema se utilizaron tres niveles de pruebas:
+
+### Pruebas unitarias
+
+Se verificaron las reglas del sistema y el funcionamiento de los servicios de habitaciones de manera aislada.
+
+Se utilizaron repositorios simulados y un reloj controlado para comprobar diferentes situaciones sin depender de archivos ni bases de datos.
+
+### Pruebas de integración
+
+Se comprobó la comunicación entre el servicio de habitaciones y el repositorio JSON, verificando que los datos puedan guardarse y recuperarse correctamente.
+
+### Pruebas funcionales (E2E)
+
+Se verificó el funcionamiento completo mediante solicitudes HTTP al servidor real.
+
+Se probó el flujo de ingreso al panel, cambio de estado de una habitación, aplicación de la regla de limpieza y conservación de los cambios después de reiniciar el sistema.
+
+## 4. Resultados obtenidos
+
+En la última ejecución se obtuvieron los siguientes resultados:
+
+| Tipo de prueba | Casos ejecutados | Resultado |
+|---|---:|---|
+| Unitarias | 23 | Todas aprobadas |
+| Integración | 4 | Todas aprobadas |
+| Funcionales (E2E) | 2 | Todas aprobadas |
+| **Total** | **29** | **29 aprobadas** |
+
+**Resultado general:** 29 pruebas aprobadas y 0 fallidas, distribuidas en 10 grupos.
+
+Para ejecutar las pruebas se utilizaron los siguientes comandos:
+
+```bash
+npm test
+```
+
+También se pueden ejecutar por separado:
+
+```bash
+npm run test:unit
+npm run test:integracion
+npm run test:e2e
+```
+
+Se requiere Node.js 20 o superior y no se necesitan dependencias externas para ejecutar las pruebas.
+
+## 5. Errores encontrados y correcciones realizadas
+
+Durante la verificación se encontraron algunos problemas en el código inicial:
+
+- El controlador `HosteriaController.js` tenía dos versiones de una misma función mezcladas y una llave sin cerrar, lo que impedía ejecutar el código.
+- El archivo `FRONTEND/index.html` tenía dos documentos HTML mezclados, por lo que quedó pendiente resolver qué versión conservar.
+- El módulo `HosteriaModels.js` no tenía implementada la lógica de habitaciones.
+- El comando de pruebas presentaba problemas de ejecución en Node.js 22 porque intentaba ejecutar directamente una carpeta.
+
+Para solucionar estos inconvenientes se reorganizó el backend, separando las reglas del negocio, los servicios, la persistencia y el controlador. También se corrigió la configuración de las pruebas en `package.json`.
+
+Además, se realizó una prueba introduciendo intencionalmente un error en la regla de limpieza. Dos pruebas detectaron el problema en el límite de las 10:30. Después de corregirlo, las 29 pruebas volvieron a aprobarse.
+
+## 6. Aspectos pendientes de desarrollo
+
+Aunque las pruebas realizadas fueron satisfactorias, todavía existen aspectos que deben completarse:
+
+- **Base de datos:** actualmente se utiliza un archivo JSON para guardar la información. Queda pendiente implementar SQL Server y repetir las pruebas de integración.
+- **Frontend:** se debe resolver el conflicto existente en `index.html` y completar el panel de habitaciones.
+- **Pruebas de interfaz:** una vez terminado el frontend, se deberán agregar pruebas en el navegador para comprobar que las etiquetas y los colores se visualicen correctamente.
+- **Regla de limpieza:** confirmar con la hostería si el cambio de `en_limpieza` a `libre` será automático o manual. En esta versión se implementó de forma manual, bloqueando el cambio antes de las 10:30.
+- **Clausura y rehabilitación:** falta definir el procedimiento para clausurar y volver a habilitar una habitación.
+- **Concurrencia:** todavía no se verificó qué sucede cuando dos usuarios intentan modificar simultáneamente la misma habitación.
+
+## 7. Alcance de esta versión
+
+Siguiendo el principio YAGNI definido en el proyecto, esta primera versión se concentra únicamente en la gestión de habitaciones.
+
+Por lo tanto, todavía no se implementaron ni verificaron los módulos de:
+
+- Reservas.
+- Huéspedes.
+- Pagos.
+- Inicio de sesión.
+
+Estas funcionalidades se incorporarán en futuras etapas, cuando se amplíe el alcance del sistema.
+
+## 8. Uso de inteligencia artificial
+
+Durante la realización del TP N.º 4 se utilizó Claude como herramienta de asistencia para analizar el repositorio, detectar errores, proponer correcciones y generar casos de prueba.
+
+La herramienta permitió identificar problemas en el código inicial y organizar las pruebas unitarias, de integración y funcionales.
+
+El resultado generado debe ser revisado por los integrantes del equipo, comprobando que las soluciones propuestas respeten las necesidades reales de la Hostería ATEP y los criterios de aceptación establecidos.
+
+---
+
+**Conclusión**
+
+La verificación permitió comprobar el funcionamiento de las reglas principales del módulo de habitaciones mediante 29 pruebas automatizadas, todas aprobadas.
+
+También permitió detectar y corregir errores que impedían ejecutar el proyecto. Si bien esta primera versión cumple con los casos verificados, todavía queda trabajo pendiente en la interfaz, la integración con SQL Server y las funcionalidades que forman parte del alcance general del sistema.
 El proyecto será realizado por tres integrantes. Los nombres se completarán en la entrega del grupo.
