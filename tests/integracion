@@ -1,0 +1,65 @@
+// PRUEBA DE INTEGRACIÓN — dos módulos reales: HabitacionesService + HabitacionesRepositorioJSON.
+// Sin dobles de prueba: se verifica que el servicio y la persistencia se comunican bien.
+// Se usa un archivo temporal para no tocar los datos reales.
+const { describe, it, beforeEach, afterEach } = require('node:test');
+const assert = require('node:assert/strict');
+const fs = require('node:fs/promises');
+const os = require('node:os');
+const path = require('node:path');
+const { HabitacionesService } = require('../../BACKEND/HabitacionesService');
+const { HabitacionesRepositorioJSON } = require('../../BACKEND/HabitacionesRepositorioJSON');
+
+let carpeta;
+let archivo;
+
+beforeEach(async () => {
+    carpeta = await fs.mkdtemp(path.join(os.tmpdir(), 'atep-'));
+    archivo = path.join(carpeta, 'habitaciones.json');
+    await fs.writeFile(archivo, JSON.stringify([
+        { numero: 1, estado: 'libre', camas: 2, plazas: 2 },
+        { numero: 2, estado: 'ocupada', camas: 3, plazas: 4 },
+    ]));
+});
+
+afterEach(async () => {
+    await fs.rm(carpeta, { recursive: true, force: true });
+});
+
+describe('Integración servicio ↔ repositorio JSON', () => {
+    it('I1 [R4] un cambio de estado queda escrito en el archivo', async () => {
+        const servicio = new HabitacionesService(new HabitacionesRepositorioJSON(archivo));
+
+        await servicio.cambiarEstado(2, 'en_limpieza');
+
+        const enDisco = JSON.parse(await fs.readFile(archivo, 'utf8'));
+        assert.equal(enDisco.find((h) => h.numero === 2).estado, 'en_limpieza');
+        assert.equal(enDisco.length, 2, 'no debe duplicar la habitación');
+    });
+
+    it('I2 [R4] el estado se conserva al "reabrir" el sistema (nuevas instancias)', async () => {
+        await new HabitacionesService(new HabitacionesRepositorioJSON(archivo)).cambiarEstado(1, 'clausurada');
+
+        const servicioNuevo = new HabitacionesService(new HabitacionesRepositorioJSON(archivo));
+        const lista = await servicioNuevo.listar();
+        assert.equal(lista.find((h) => h.numero === 1).estado, 'clausurada');
+    });
+
+    it('I3 [R1] un estado inválido no modifica el archivo', async () => {
+        const antes = await fs.readFile(archivo, 'utf8');
+        const servicio = new HabitacionesService(new HabitacionesRepositorioJSON(archivo));
+
+        await assert.rejects(servicio.cambiarEstado(1, 'reservada'));
+
+        assert.equal(await fs.readFile(archivo, 'utf8'), antes);
+    });
+
+    it('I4 [R6] registrar una nueva habitación la agrega y bloquea el número repetido', async () => {
+        const servicio = new HabitacionesService(new HabitacionesRepositorioJSON(archivo));
+
+        await servicio.registrar({ numero: 5, estado: 'libre' });
+        await assert.rejects(servicio.registrar({ numero: 5, estado: 'ocupada' }), /Ya existe/);
+
+        const lista = await servicio.listar();
+        assert.deepEqual(lista.map((h) => h.numero), [1, 2, 5]);
+    });
+});

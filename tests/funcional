@@ -1,0 +1,90 @@
+// PRUEBA FUNCIONAL / E2E — flujo real del encargado, de punta a punta por HTTP:
+// 1) abre el panel y ve las habitaciones   2) el huésped de la 2 hizo check-out → "en_limpieza"
+// 3) intenta liberarla antes de las 10:30 y el sistema lo impide
+// 4) a las 10:45 la marca como "libre"   5) cierra y vuelve a abrir el sistema → el estado sigue ahí.
+const { describe, it, before, after } = require('node:test');
+const assert = require('node:assert/strict');
+const fs = require('node:fs/promises');
+const os = require('node:os');
+const path = require('node:path');
+const { crearServidor } = require('../../BACKEND/server');
+
+let carpeta;
+let archivo;
+let horaActual = new Date(2026, 10, 13, 10, 5);
+const reloj = () => horaActual;
+
+function iniciar() {
+    return new Promise((resolve) => {
+        const servidor = crearServidor({ rutaDatos: archivo, reloj });
+        servidor.listen(0, () => resolve({
+            servidor,
+            base: `http://127.0.0.1:${servidor.address().port}/api/habitaciones`,
+        }));
+    });
+}
+const detener = (servidor) => new Promise((resolve) => servidor.close(resolve));
+const cambiarEstado = (base, numero, estado) => fetch(`${base}/${numero}/estado`, {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ estado }),
+});
+
+before(async () => {
+    carpeta = await fs.mkdtemp(path.join(os.tmpdir(), 'atep-e2e-'));
+    archivo = path.join(carpeta, 'habitaciones.json');
+    await fs.copyFile(path.join(__dirname, '..', '..', 'data', 'habitaciones.ejemplo.json'), archivo);
+});
+
+after(async () => {
+    await fs.rm(carpeta, { recursive: true, force: true });
+});
+
+describe('E2E — Check-out, limpieza y liberación de una habitación', () => {
+    it('F1 recorre el flujo completo y el estado persiste tras reiniciar', async () => {
+        let { servidor, base } = await iniciar();
+
+        // 1) Panel: ve las 4 habitaciones con etiqueta legible
+        let respuesta = await fetch(base);
+        assert.equal(respuesta.status, 200);
+        let lista = await respuesta.json();
+        assert.equal(lista.length, 4);
+        assert.equal(lista.find((h) => h.numero === 2).presentacion.etiqueta, 'Ocupada');
+
+        // 2) Check-out de la 2 a las 10:05 → en limpieza
+        respuesta = await cambiarEstado(base, 2, 'en_limpieza');
+        assert.equal(respuesta.status, 200);
+
+        // 3) Intenta liberarla a las 10:20 → rechazado (400) con mensaje claro
+        horaActual = new Date(2026, 10, 13, 10, 20);
+        respuesta = await cambiarEstado(base, 2, 'libre');
+        assert.equal(respuesta.status, 400);
+        assert.match((await respuesta.json()).error, /10:30/);
+
+        // 4) A las 10:45 sí puede liberarla
+        horaActual = new Date(2026, 10, 13, 10, 45);
+        respuesta = await cambiarEstado(base, 2, 'libre');
+        assert.equal(respuesta.status, 200);
+
+        // 5) Cierra y vuelve a abrir el sistema
+        await detener(servidor);
+        ({ servidor, base } = await iniciar());
+        lista = await (await fetch(base)).json();
+        assert.equal(lista.find((h) => h.numero === 2).estado, 'libre');
+        assert.equal(lista.find((h) => h.numero === 2).presentacion.etiqueta, 'Libre');
+
+        await detener(servidor);
+    });
+
+    it('F2 [error] estado inválido o habitación inexistente devuelven error y no cambian nada', async () => {
+        const { servidor, base } = await iniciar();
+
+        assert.equal((await cambiarEstado(base, 1, 'reservada')).status, 400);
+        assert.equal((await cambiarEstado(base, 99, 'libre')).status, 404);
+
+        const lista = await (await fetch(base)).json();
+        assert.equal(lista.find((h) => h.numero === 1).estado, 'libre');
+
+        await detener(servidor);
+    });
+});

@@ -1,0 +1,6 @@
+[
+  { "numero": 1, "estado": "libre", "camas": 2, "plazas": 2 },
+  { "numero": 2, "estado": "ocupada", "camas": 3, "plazas": 4 },
+  { "numero": 3, "estado": "en_limpieza", "camas": 1, "plazas": 1 },
+  { "numero": 4, "estado": "clausurada", "camas": null, "plazas": null }
+]
