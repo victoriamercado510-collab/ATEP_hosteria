@@ -48,4 +48,8 @@ function crearControlador(servicio) {
     };
 }
 
+
 module.exports = { crearControlador };
+
+
+
